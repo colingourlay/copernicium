@@ -2,23 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Basic - Coperincium Examples</title>
+    <title>Coperincium Examples - Coperincium Examples</title>
     <style>
-html {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	min-height: 100%;
+html, body, dl {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
 }
-button {
-	border: none;
-	width: 2.5em;
-	color: #fff;
-	font-size: 5em;
-	line-height: 1.25;
+.dropzone {
+	position: absolute;
+	top: 0;
+    right: 0;
+	left: 0;
 }
-.off { background-color: red; }
-.on { background-color: green; }
+.dropzone > * {
+    margin: 20px;
+}
+.dropzone > dd {
+    padding: 0 0 0 20px;
+    color: #669966;
+}
+.is-droppable {
+    background-color: #ccffcc;
+}
     </style>
     <!--[if IE 8]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/es5-shim/4.1.0/es5-shim.min.js" type="text/javascript"></script>

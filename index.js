@@ -6,24 +6,27 @@ var vdom = {
     patch: require('virtual-dom/vdom/patch')
 };
 
-module.exports = extend(copernicium, {
+var copernicium = module.exports = extend(init, {
 
     // State
-    state: createState,
     array: require('observ-array'),
     struct: require('observ-struct'),
     value: require('observ'),
     varhash: require('observ-varhash'),
+    state: createState,
 
     // Events
+    BaseEvent: require('value-event/base-event'),
+    Delegator: require('dom-delegator'),
+    listenTo: listenTo,
+    send: extend(require('value-event/event'), {
+        change: require('value-event/change'),
+        click: require('value-event/click'),
+        key: require('value-event/key'),
+        submit: require('value-event/submit'),
+        value: require('value-event/value')
+    }),
     channels: createChannels,
-    Delegator: require('dom-delegator')
-    send: require('value-event/event'),
-    sendChange: require('value-event/change'),
-    sendClick: require('value-event/click'),
-    sendKey: require('value-event/key'),
-    sendSubmit: require('value-event/submit'),
-    sendValue: require('value-event/value'),
 
     // Render
     h: require('virtual-dom/virtual-hyperscript'),
@@ -31,7 +34,7 @@ module.exports = extend(copernicium, {
 
 });
 
-function copernicium(el, state, render, options) {
+function init(el, state, render, options) {
     if (!el) { throw new Error('Element does not exist.'); }
 
     copernicium.Delegator(options);
@@ -69,4 +72,13 @@ function createState(stateObj) {
     }
 
     return state;
+}
+
+function listenTo(eventName, sendFn) {
+    if (copernicium.send[eventName]) { throw new Error('"' + eventName + '" event is already defined.'); }
+
+    copernicium.Delegator().listenTo(eventName);
+    copernicium.send[eventName] = (sendFn.name == 'EventHandler') ? sendFn : copernicium.BaseEvent(sendFn);
+
+    return copernicium;
 }

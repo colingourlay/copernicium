@@ -15,7 +15,7 @@ App.channels = {
 
 App.render = function render(state) {
 	return cn.h('button.' + (state.isOn ? 'on' : 'off'), {
-		'ev-click': cn.sendClick(state.channels.toggle, {})
+		'ev-click': cn.send.click(state.channels.toggle, {})
 	}, state.isOn ? 'ON' : 'OFF');
 };
 

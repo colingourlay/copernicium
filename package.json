@@ -1,10 +1,10 @@
 {
   "name": "copernicium",
   "version": "1.0.0",
-  "description": "A clone of github.com/Raynos/mercury with a few API tweaks",
+  "description": "A unidirectional frontend framework, based on github.com/Raynos/mercury",
   "main": "index.js",
   "scripts": {
-    "example-basic": "node_modules/.bin/beefy examples/basic/index.js --index=examples/basic/index.html"
+    "example": "bin/serve-example.sh"
   },
   "author": "Colin Gourlay",
   "license": "ISC",
